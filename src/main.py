@@ -5,10 +5,18 @@ with open("../operations.json", "r", encoding='utf8') as data_file:
     data = json.loads(json_data)
 
 
-def date_formater(data_date):
-    transaction_date = data_date.split('T')[0]
-    return '.'.join(transaction_date.split('-')[::-1])
+for msg in data:
+    if msg:
+        date_sms = msg.get('date', '')
+        descr_sms = msg.get('description', '')
+        sender_sms = msg.get('from', '')
+        address_sms = msg.get('to', '')
+        if sender_sms:
+            sign_sms = ' -> '
+        else:
+            sign_sms = ''
+        money_sms =msg.get('operationAmount')['amount']
+        currency_sms = msg.get('operationAmount')['currency']['name']
+        print(f'{date_sms} {descr_sms}\n{sender_sms}{sign_sms}{address_sms}\n{money_sms} {currency_sms}\n')
 
 
-formated_date = date_formater(data[0]['date'])
-print(formated_date)
