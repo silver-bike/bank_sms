@@ -11,7 +11,7 @@ def read_number(some_number):
     number_lst = some_number.split()
     num = list(number_lst[-1])
     if len(num) == 16:
-        num[6:12] = ["*","*"," ","*","*","*","*"," ",]
+        num[6:12] = ["*", "*", " ", "*", "*", "*", "*", " "]
         num.insert(4, " ")
     else:
         num = num[-4:]
@@ -29,13 +29,13 @@ for msg in data:
         sms_date = ".".join(sms_date_time.split("T")[0].split("-")[::-1])
         sms_description = msg.get('description', '')
         sms_from = msg.get('from', '')
-        sms_to = msg.get('to', '')
+        sms_to = read_number(msg.get('to', ''))
         if sms_from:
+            sms_from = read_number(sms_from)
             sms_send = ' -> '
         else:
             sms_send = ''
         sms_amount = msg.get('operationAmount')['amount']
         sms_currency = msg.get('operationAmount')['currency']['name']
         if sms_filter == sms_state:
-            print(f'{sms_date} {sms_description}\n{sms_from}{sms_send}{read_number(sms_to)}\n{sms_amount} {sms_currency}\n')
-            print(read_number(sms_to))
+            print(f'{sms_date} {sms_description}\n{sms_from}{sms_send}{sms_to}\n{sms_amount} {sms_currency}\n')
