@@ -5,18 +5,22 @@ with open("../operations.json", "r", encoding='utf8') as data_file:
     data = json.loads(json_data)
 
 
+sms_filter = "EXECUTED"
+
 for msg in data:
     if msg:
-        date_sms = msg.get('date', '')
-        descr_sms = msg.get('description', '')
-        sender_sms = msg.get('from', '')
-        address_sms = msg.get('to', '')
-        if sender_sms:
-            sign_sms = ' -> '
+        sms_id = msg.get('id', '')
+        sms_state = msg.get('state', '')
+        sms_date_time = msg.get('date', '')
+        sms_date = ".".join(sms_date_time.split("T")[0].split("-")[::-1])
+        sms_description = msg.get('description', '')
+        sms_from = msg.get('from', '')
+        sms_to = msg.get('to', '')
+        if sms_from:
+            sms_send = ' -> '
         else:
-            sign_sms = ''
-        money_sms =msg.get('operationAmount')['amount']
-        currency_sms = msg.get('operationAmount')['currency']['name']
-        print(f'{date_sms} {descr_sms}\n{sender_sms}{sign_sms}{address_sms}\n{money_sms} {currency_sms}\n')
-
-
+            sms_send = ''
+        sms_amount = msg.get('operationAmount')['amount']
+        sms_currency = msg.get('operationAmount')['currency']['name']
+        if sms_filter == sms_state:
+            print(f'{sms_date} {sms_description}\n{sms_from}{sms_send}{sms_to}\n{sms_amount} {sms_currency}\n')
