@@ -1,7 +1,7 @@
 import json
-from functions import mask_number
+from src.functions import mask_number
 
-with open("../operations.json", "r", encoding='utf8') as data_file:
+with open("operations.json", "r", encoding='utf8') as data_file:
     json_data = data_file.read()
     data = json.loads(json_data)
 
