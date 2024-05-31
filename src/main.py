@@ -7,6 +7,8 @@ with open("../operations.json", "r", encoding='utf8') as data_file:
 
 sms_filter = "EXECUTED"
 
+sms_lst = []
+
 for msg in data:
     if msg:
         sms_id = msg.get('id', '')
@@ -23,5 +25,13 @@ for msg in data:
             sms_send = ''
         sms_amount = msg.get('operationAmount')['amount']
         sms_currency = msg.get('operationAmount')['currency']['name']
+        sms_text = (f'{sms_date} {sms_description}\n'
+                    f'{sms_from}{sms_send}{sms_to}\n'
+                    f'{sms_amount} {sms_currency}\n')
         if sms_filter == sms_state:
-            print(f'{sms_date} {sms_description}\n{sms_from}{sms_send}{sms_to}\n{sms_amount} {sms_currency}\n')
+            sms_lst.append((sms_date_time, sms_text))
+
+sms_lst.sort(reverse = True)
+sms_limit = min(5, len(sms_lst))
+for key, sms in sms_lst[:sms_limit]:
+    print(sms)
