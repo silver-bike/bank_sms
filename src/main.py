@@ -1,25 +1,11 @@
 import json
+from functions import mask_number
 
 with open("../operations.json", "r", encoding='utf8') as data_file:
     json_data = data_file.read()
     data = json.loads(json_data)
 
 sms_filter = "EXECUTED"
-
-
-def read_number(some_number):
-    number_lst = some_number.split()
-    num = list(number_lst[-1])
-    if len(num) == 16:
-        num[6:12] = ["*", "*", " ", "*", "*", "*", "*", " "]
-        num.insert(4, " ")
-    else:
-        num = num[-4:]
-        num.insert(0, "*")
-        num.insert(0, "*")
-    number_lst[-1] = ''.join(num)
-    return ' '.join(number_lst)
-
 
 for msg in data:
     if msg:
@@ -29,9 +15,9 @@ for msg in data:
         sms_date = ".".join(sms_date_time.split("T")[0].split("-")[::-1])
         sms_description = msg.get('description', '')
         sms_from = msg.get('from', '')
-        sms_to = read_number(msg.get('to', ''))
+        sms_to = mask_number(msg.get('to', ''))
         if sms_from:
-            sms_from = read_number(sms_from)
+            sms_from = mask_number(sms_from)
             sms_send = ' -> '
         else:
             sms_send = ''
