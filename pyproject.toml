@@ -12,6 +12,7 @@ pytest = "^8.2.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.1"
+pytest-cov = "^5.0.0"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
