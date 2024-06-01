@@ -5,3 +5,4 @@ data = data_from_json("../operations.json")
 sms_lst = sms_listing(data)
 print_sms(sms_lst, 5)
 
+print(data_from_json("../test.json"))
