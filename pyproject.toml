@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "bank-sms"
+version = "0.1.0"
+description = "функция выводит на экран список из 5 последних выполненных клиентом операций"
+authors = ["silverbike <silverbike.python@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.2.1"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.1"
+pytest-cov = "^5.0.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"

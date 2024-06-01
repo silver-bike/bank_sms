@@ -1,0 +1,40 @@
+# Установка через Poetry
+poetry add –G dev pytest
+
+# Установка через pip
+pip install pytest
+
+
+
+# Через pip
+pip install pytest-cov
+
+# Через Poetry с добавлением в отдельную группу
+poetry add -G dev pytest-cov
+
+
+pytest --cov    #— при активированном виртуальном окружении
+poetry run pytest -cov   #— через Poetry
+pytest --cov=src --cov-report=html     # отчет о покрытии в HTML-формате
+--cov src --cov-report term-missing    # отчет о покрытии
+
+
+
+
+
+import pytest
+
+# Создаем фикстуру, которая запускается перед каждым тестом
+@pytest.fixture
+def coll(): # имя фикстуры любое
+    return ['One', True, 3, [1, 'hello', [0]], 'hi', {}, '', [], False]
+
+# pytest сам прокидывает результат вызова функции там, где она указана в аргументе
+# Имя параметра совпадает с именем фикстуры
+def test_func1(coll):
+    assert func1(coll) == # тут ожидаемое значение
+
+# Не важно, что предыдущий тест сделал с коллекцией
+# Здесь она будет новая, так как pytest вызывает coll() заново
+def test_func2(coll):
+    assert func2(coll) == # тут ожидаемое значение
