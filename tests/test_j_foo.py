@@ -1,3 +1,5 @@
+import pytest
+
 from src.j_foo import data_from_json
 
 
@@ -9,3 +11,9 @@ def test_data_from_json():
 
 def test_data_from_json_empty():
     assert data_from_json("C:/Users/podob/dev/sky-python/Bank_SMS/empty.json") == []
+
+
+def test_data_from_json_no_file():
+    with pytest.raises(FileNotFoundError):
+        data_from_json("No_File.json")
+
