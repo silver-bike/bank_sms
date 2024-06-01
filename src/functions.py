@@ -16,7 +16,6 @@ def sms_listing(some_data, sms_filter="EXECUTED"):
     sms_lst = []
     for msg in some_data:
         if msg:
-            sms_id = msg.get('id', '')
             sms_state = msg.get('state', '')
             sms_date_time = msg.get('date', '')
             sms_date = ".".join(sms_date_time.split("T")[0].split("-")[::-1])
