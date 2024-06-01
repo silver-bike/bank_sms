@@ -37,3 +37,9 @@ def sms_listing(some_data, sms_filter="EXECUTED"):
                 sms_lst.append((sms_date_time, sms_text))
     return sms_lst
 
+
+def print_sms(some_list, some_limit=5):
+    some_list.sort(reverse=True)
+    sms_limit = min(some_limit, len(some_list))
+    for key, sms in some_list[:sms_limit]:
+        print(sms)
